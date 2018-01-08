@@ -30,7 +30,7 @@
 
 注意数据缺失值处理
 
-#### 5.灵敏度分析Sensitivity Analysis
+#### 5.结果分析Sensitivity Analysis
 
 #### 6.案例分析Case Study/模拟Simulation
 
@@ -69,8 +69,6 @@
 分类：分类器、聚类、选权值、AI算法
 
 评价：层次分析法
-
-学习MATLAB建模
 
 basic model——normal model——extended model
 
