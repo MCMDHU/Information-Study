@@ -58,6 +58,21 @@
         5. 根据每个离散点的相邻三角形，连接这些相邻三角形的外接圆圆心，即得到泰森多边形。对于三角网边缘的泰森多边形，可作垂直平分线与图廓相交，与图廓一起构成泰森多边形。
      2. matlab代码
 
+     ```matlab
+     %%构建voronoi
+     x = rand(1,100);
+     y = rand(1,100);
+     TRI = delaunay(x,y);
+     NOI = voronoi(x,y);
+     voronoi(x,y);
+     hold on;
+     triplot(TRI,x,y);
+     axis([0 1 0 1]);
+     hold on;
+     plot(x,y,'or');
+     hold off
+     ```
+
      ​
 
    ​
