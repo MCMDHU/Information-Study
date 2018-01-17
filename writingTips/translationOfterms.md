@@ -25,3 +25,6 @@ effectiveness multiplier  效能倍增器
 randomly guessing algorithm  随机预测算法
 
 average offset distance   平均偏距
+
+Single moving average    一次移动平均法
+
