@@ -1,0 +1,46 @@
+function [y,v2,u2,gongxianlv,leijigongxianlv,z]=zhuchenfen(x)  
+                %y返回相关系数矩阵  v2返回特征值 u2返回特征向量
+                % gongxianlv贡献率 leijigongxianlv累计贡献率  z主成分载荷矩阵
+a=size(x);
+n=a(1);              %数据的个数
+p=a(2);              %变量的个数.
+%-----第一步---计算相关系数矩阵------------
+X=mean(x);        %得到x每列的平均值,列数为p
+for i=1:p
+    for j=1:p
+          for k=1:n
+            t1(k)=  ( x(k,i)-X(i) )*( x(k,j)-X(j)  )  ;
+            t2(k)= ( x(k,i)-X(i) )^2;
+            t3(k)= ( x(k,j)-X(j)  )^2 ;
+          end
+        t4=sum(t1);      %t1到t6都是一些临时变量,主要为方便中间的计算
+        t5=sum(t2);
+        t6=sum(t3);
+        r(i,j)=t4/sqrt(t5*t6);       %r(i,j)为相关系数矩阵的每个元素
+    end
+end
+y=r;
+%--------------第二步:计算特征值v2与特征向量u2
+[u,v]=eig(r);       %u矩阵的每一列为v的每一个对应特征值对应的特征向量
+v=diag(v);            %将对角矩阵v转化成向量v(结果会按从小到大顺序排),若v为向量则转化为对角转阵
+v1=v(end:-1:1);       %将特征值v1从大到小的顺序排列得到v1
+u1=u(:,end:-1:1);       %相应特征向量按倒序排列
+for t=1:length(v1)
+    if v1(t)>0
+        v2(t)=v1(t);    %找出特征值大于0的构成特征值v2
+            end
+end
+u2=u1(:,1:length(v2));         %u2为最终大于0的特征值对应的特征向量,若特征值全大于0,则u2与u1相同
+%-----第三步:计算贡献率和累计贡献率
+gongxianlv=v2/sum(v2);            %计算特征值v2对应的贡献率
+leijigongxianlv=cumsum(gongxianlv);   %计算累计贡献率
+%----第四步:确定主成份个数....代码省略以后补充
+%只需找出累计达到累计贡献率80%或85%的(或是特征值大于等于1)的几个特征值
+%----第五步:计算载荷
+tt=size(u2);
+temp=tt(2);    %temp为特征向量u2的列数
+z(p,temp)=0;   %定义载荷矩阵的行数与列数
+  for q=1:temp
+      z(:,q)=u2(:,q).*sqrt(v2(q));
+   end
+%最终的z矩阵为主成分载荷矩阵,主成分个数为几个,则载荷矩阵相应取前几列
