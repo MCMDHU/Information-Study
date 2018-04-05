@@ -6,9 +6,9 @@
 
 [书籍](./repository)
 
-[美赛](./mcmProblems)
+[美赛](./mcmProblems/AUMCM)
 
-[国赛](./mcmPrblems/MCM-CN)
+[国赛](./mcmPrblems/CUMCM)
 
 ### 笔记和总结
 
